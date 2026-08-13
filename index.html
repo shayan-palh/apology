@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Am So Sorry, My Friend | Please Forgive Me</title>
+  <meta name="description" content="A sincere friendship apology asking for forgiveness with falling flowers." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body data-theme="velvet">
+  <!-- Interactive Background Canvas (Falling Flowers & Petals Shower) -->
+  <canvas id="petals-canvas"></canvas>
+  <canvas id="fireworks-canvas"></canvas>
+
+  <!-- Ambient Glow Background Gradients -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <span class="heart-icon">🌸</span>
+      <span class="brand-text">For My Best Friend</span>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Music Control -->
+      <button id="music-toggle" class="nav-btn" aria-label="Toggle Soothing Music" title="Toggle Music">
+        <svg id="music-icon-on" class="nav-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18V5l12-2v13"></path>
+          <circle cx="6" cy="18" r="3"></circle>
+          <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+        <svg id="music-icon-off" class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+          <path d="M9 9v9"></path>
+          <circle cx="6" cy="18" r="3"></circle>
+          <path d="M12 7.5L21 6v6"></path>
+          <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+        <span class="btn-label">Ambient Music</span>
+      </button>
+
+      <!-- Theme Selector -->
+      <div class="theme-menu-container">
+        <button id="theme-btn" class="nav-btn" aria-label="Change Color Theme" title="Theme Palette">
+          <span class="theme-dot"></span>
+          <span class="btn-label">Theme</span>
+        </button>
+        <div id="theme-dropdown" class="dropdown-menu hidden">
+          <button data-set-theme="velvet" class="theme-option active">
+            <span class="dot velvet-dot"></span> Velvet Rose & Gold
+          </button>
+          <button data-set-theme="midnight" class="theme-option">
+            <span class="dot midnight-dot"></span> Midnight Stardust
+          </button>
+          <button data-set-theme="blush" class="theme-option">
+            <span class="dot blush-dot"></span> Soft Blush Romance
+          </button>
+        </div>
+      </div>
+
+      <!-- Customize Button -->
+      <button id="customize-btn" class="nav-btn primary-nav-btn" aria-label="Customize Message">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+        <span>Customize</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="content-wrapper">
+    <section class="hero-section" id="hero">
+      <div class="hero-content glass-card glow-border apology-card">
+        <div class="romantic-badge">
+          <span class="badge-sparkle">✦</span>
+          <span>A Note To My Dear Friend</span>
+          <span class="badge-sparkle">✦</span>
+        </div>
+
+        <h1 class="hero-title">
+          I Am So Sorry, <span id="recipient-name-display" class="highlight-text">My Dear Friend</span> 🌸
+        </h1>
+
+        <!-- Short & Sweet Friendship Apology Note -->
+        <div class="apology-message-body">
+          <p id="apology-text-main">
+            "I am so sorry for making you upset. Our friendship means so much to me, and I never meant to hurt your feelings. Can you please forgive me?"
+          </p>
+        </div>
+
+        <!-- Flower Icon -->
+        <div class="hero-heart-container">
+          <div class="glowing-heart">
+            <svg class="heart-svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <div class="heart-pulse-rings">
+            <span class="ring ring-1"></span>
+            <span class="ring ring-2"></span>
+            <span class="ring ring-3"></span>
+          </div>
+        </div>
+
+        <!-- Interactive Forgiveness & Flower Fall Trigger Button -->
+        <div class="forgiveness-prompt-wrapper">
+          <h2 class="prompt-question">Will you forgive me?</h2>
+          
+          <div class="button-group">
+            <!-- Main Flower Fall Button -->
+            <button id="forgive-flower-btn" class="btn btn-yes shadow-glow btn-flower-trigger">
+              <span class="btn-emoji">🌸</span>
+              <span>Forgive Me & Shower Flowers 🌹</span>
+            </button>
+
+            <!-- Playful Think Button -->
+            <button id="forgive-no-btn" class="btn btn-no">
+              <span class="btn-emoji">💭</span>
+              <span id="no-btn-text">Let me think...</span>
+            </button>
+          </div>
+
+          <div id="playful-feedback" class="playful-feedback hidden"></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <p>Your Caring Friend, <span id="sender-name-display">Your Friend</span> 🌸</p>
+  </footer>
+
+  <!-- Forgiveness Celebration Modal -->
+  <div id="celebration-modal" class="modal-overlay hidden">
+    <div class="modal-card glass-card animate-pop">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      
+      <div class="modal-icon-header">
+        <div class="big-glowing-heart">🌸🌼🌹</div>
+      </div>
+
+      <h3 class="modal-title">Thank You For Forgiving Me!</h3>
+      <p class="modal-message">
+        You're an awesome friend! These flowers fall just for you. Thanks for understanding and being such a great friend!
+      </p>
+
+      <div class="modal-actions">
+        <button id="modal-hug-btn" class="btn btn-romantic shadow-glow">
+          <span>Shower More Flowers 🌸</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personalization Settings Drawer -->
+  <div id="customize-drawer" class="drawer-overlay hidden">
+    <div class="drawer-panel glass-card">
+      <div class="drawer-header">
+        <h3>Personalize Your Message</h3>
+        <button id="drawer-close-btn" class="close-btn">&times;</button>
+      </div>
+
+      <div class="drawer-body">
+        <p class="drawer-hint">Customize names & wording to share a personalized link with her!</p>
+
+        <div class="form-group">
+          <label for="input-recipient">Her Name / Friend's Name</label>
+          <input type="text" id="input-recipient" placeholder="e.g. Sarah, Bestie" value="My Dear Friend" />
+        </div>
+
+        <div class="form-group">
+          <label for="input-sender">Your Name / Signature</label>
+          <input type="text" id="input-sender" placeholder="e.g. Alex, Your Friend" value="Your Friend" />
+        </div>
+
+        <div class="form-group">
+          <label for="input-letter">Apology Note</label>
+          <textarea id="input-letter" rows="4" placeholder="Write your short apology note..."></textarea>
+        </div>
+
+        <div class="drawer-actions">
+          <button id="save-customization-btn" class="btn btn-romantic shadow-glow">
+            Save & Update Page
+          </button>
+          
+          <button id="share-link-btn" class="btn btn-secondary">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <span>Copy Personalized Link</span>
+          </button>
+        </div>
+
+        <div id="share-toast" class="toast hidden">
+          <span>Link copied to clipboard! Share it with her! 💌</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
